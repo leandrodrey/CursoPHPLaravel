@@ -47,3 +47,12 @@
 
 > Ejemplo para instalar laravel (versión más actual según tu versión de PHP)    
 `composer create-project laravel/laravel proyecto`
+
+
+`cd proyecto`
+
+> EL MARAVILLOSO MUNDO DE ARTISAN    
+> para iniciar al server es el comando
+
+`php artisan serve`
+
