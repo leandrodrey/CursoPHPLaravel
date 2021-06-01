@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function ()
+{
     return view('welcome');
 });
 
@@ -25,4 +26,9 @@ Route::get('/saludo', function()
 Route::get('/prueba', function ()
 {
     return view('primera');
+});
+#### plantillas
+Route::get('/inicio', function ()
+{
+    return view('inicio');
 });
