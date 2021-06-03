@@ -50,7 +50,24 @@ Route::get('/adminRegiones', function()
     //retornamos la vista pasando dato
     return view('adminRegiones', [ 'regiones'=>$regiones ] );
 });
-
+Route::get('/agregarRegion', function()
+{
+    //retornamos vista del formulario
+    return view('agregarRegion');
+});
+Route::post('/agregarRegion', function ()
+{
+    //capturamos datos enviados por el form
+    $regNombre = $_POST['regNombre'];
+    //guardamos en bDD
+    DB::insert("INSERT INTO regiones
+                           ( regNombre )
+                    VALUES ( :regNombre )
+                    ", [ $regNombre ] );
+    //redirigimos con mensaje ok
+    return redirect('/adminRegiones')
+                ->with('mensaje', 'Región: '.$regNombre.' agregada correctamente');
+});
 ################################
 #### CRUD de destinos
 Route::get('/adminDestinos', function ()
