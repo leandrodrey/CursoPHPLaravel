@@ -50,3 +50,17 @@ Route::get('/adminRegiones', function()
     //retornamos la vista pasando dato
     return view('adminRegiones', [ 'regiones'=>$regiones ] );
 });
+
+################################
+#### CRUD de destinos
+Route::get('/adminDestinos', function ()
+{
+    $destinos = DB::select("
+                SELECT destID, destNombre, regNombre, destPrecio
+                    FROM regiones r, destinos d
+                    WHERE r.regID = d.regID
+                ");
+    return view('adminDestinos',
+                [ 'destinos'=>$destinos ]
+            );
+});
