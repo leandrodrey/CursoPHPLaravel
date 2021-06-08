@@ -10,7 +10,7 @@
             <th>Región</th>
             <th>Precio</th>
             <th colspan="2">
-                <a href="/formAgregarDestino" class="btn btn-outline-secondary">
+                <a href="/agregarDestino" class="btn btn-outline-secondary">
                     Agregar
                 </a>
             </th>

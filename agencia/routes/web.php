@@ -81,3 +81,12 @@ Route::get('/adminDestinos', function ()
                 [ 'destinos'=>$destinos ]
             );
 });
+Route::get('/agregarDestino', function ()
+{
+    //obtener listado de regiones
+    //$regiones = DB::select('SELECT regID, regNombre FROM regiones');
+    $regiones = DB::table('regiones')
+                        ->get();  // fetchAll()
+    //retornar vista pasanmdo datos
+    return view('agregarDestino', ['regiones'=>$regiones]);
+});
