@@ -85,6 +85,27 @@ Route::get('/modificarRegion/{id}', function($id)
     //retornamos vista con datos
     return view('modificarRegion',['Region'=>$Region]);
 });
+Route::post('/modificarRegion', function()
+{
+    //capturamos datos
+    $regID = $_POST['regID'];
+    $regNombre = $_POST['regNombre'];
+    //modificamos
+    /*
+    DB::update('
+                UPDATE regiones
+                    set regNombre = ?
+                    where regID = ?',
+                [$regNombre, $regID]
+        );
+    */
+    DB::table('regiones')
+            ->where( 'regID', $regID )
+            ->update( [ 'regNombre'=>$regNombre ] );
+    //redirigimos + mensaje ok
+    return redirect('/adminRegiones')
+            ->with('mensaje', 'Región: '.$regNombre.' modificada correctamente');
+});
 
 ################################
 #### CRUD de destinos
