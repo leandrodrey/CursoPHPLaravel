@@ -2,6 +2,11 @@
 @section('contenido')
     <h1>Panel de administración de Destinos</h1>
 
+    @if( session('mensaje') )
+        <div class="alert alert-success">
+            {{ session('mensaje') }}
+        </div>
+    @endif
 
     <table class="table table-borderless table-striped table-hover">
         <thead>
