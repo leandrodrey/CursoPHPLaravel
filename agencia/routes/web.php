@@ -106,7 +106,28 @@ Route::post('/modificarRegion', function()
     return redirect('/adminRegiones')
             ->with('mensaje', 'Región: '.$regNombre.' modificada correctamente');
 });
-
+Route::get('/eliminarRegion/{id}', function($id)
+{
+    //obtenemos datos de una región por su id
+    $Region = DB::table('regiones')
+                    ->where('regID', $id)
+                    ->first();
+    //retornamos vista de confirmación de baja
+    return view('eliminarRegion', [ 'Region'=>$Region ]);
+});
+Route::post('/eliminarRegion', function()
+{
+    //capturamos datos
+    $regNombre = $_POST['regNombre'];
+    $regID = $_POST['regID'];
+    //eliminamos
+    DB::table('regiones')
+            ->where('regID', $regID)
+            ->delete();
+    //redirigimos + mensaje ok
+    return redirect('/adminRegiones')
+        ->with('mensaje', 'Región: '.$regNombre.' eliminada correctamente');
+});
 ################################
 #### CRUD de destinos
 Route::get('/adminDestinos', function ()
