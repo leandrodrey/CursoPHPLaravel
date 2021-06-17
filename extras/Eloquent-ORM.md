@@ -10,3 +10,9 @@
 
     php artisan make:model Nombre  
 
+## Convenciones de nombres de Modelos
+
+> Los nombres de las tablas utilizan un sistema de plurales, si necesitamos modificarlos, tenemos el atributo $table.
+
+    protected $table = 'mi_tabla';  
+
