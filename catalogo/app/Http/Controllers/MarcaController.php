@@ -55,7 +55,7 @@ class MarcaController extends Controller
     public function store(Request $request)
     {
         //capturar lo que envió el form
-        $mkNombre = $request->mkNombre;
+        $mkNombre = $request->mkNombre; //$_POSTˆ['mkNombre']
         //validar
         $this->validarForm($request);
         //instanciacion, asignacion, guardar
