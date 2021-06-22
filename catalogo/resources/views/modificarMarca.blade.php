@@ -8,12 +8,15 @@
 
             <form action="/modificarMarca" method="post">
             @csrf
+            @method('put')
                 <div class="form-group">
                     <label for="mkNombre">Nombre de la marca</label>
                     <input type="text" name="mkNombre"
-                           value="{{ old('mkNombre') }}"
+                           value="{{ old('mkNombre', $Marca->mkNombre) }}"
                            class="form-control" id="mkNombre">
                 </div>
+                <input type="hidden" name="idMarca"
+                       value="{{ $Marca->idMarca }}">
                 <button class="btn btn-dark mr-3">Modificar marca</button>
                 <a href="/adminMarcas" class="btn btn-outline-secondary">
                     Volver a panel

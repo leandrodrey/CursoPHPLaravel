@@ -9,5 +9,6 @@ class Marca extends Model
 {
     use HasFactory;
     //protected $table = 'nueva_marcas';
+    protected $primaryKey = 'idMarca';
     public $timestamps = false;
 }

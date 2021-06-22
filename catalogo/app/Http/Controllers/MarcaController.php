@@ -33,7 +33,10 @@ class MarcaController extends Controller
         return view('agregarMarca');
     }
 
-
+    /**
+     * método de validación de formulario
+     * @param Request $request
+     */
     private function validarForm(Request $request)
     {
         $request->validate(
@@ -86,7 +89,10 @@ class MarcaController extends Controller
      */
     public function edit($id)
     {
-        //
+        //obtenemos datos de una marca
+        $Marca = Marca::find($id);
+        //retornamos vista con datos
+        return view('modificarMarca', [ 'Marca'=>$Marca ] );
     }
 
     /**
@@ -96,9 +102,21 @@ class MarcaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $mkNombre = $request->mkNombre;
+        //validacion
+        $this->validarForm($request);
+        //obtenemos un marca por su id
+        $Marca = Marca::find( $request->idMarca );
+        //modificación de atributos
+        $Marca->mkNombre = $mkNombre;
+        //guardar en bdd
+        $Marca->save();
+        //redirigir con mensaje ok
+        //redirección + mensaje ok
+        return redirect('adminMarcas')
+            ->with([ 'mensaje'=>'Marca: '.$mkNombre.' modificada correctamente' ]);
     }
 
     /**
