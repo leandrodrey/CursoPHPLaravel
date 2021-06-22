@@ -21,3 +21,7 @@
 > Si no queremos que Eloquent opere con estos campos, o bien si no queremos modificar la estructura de nuestras tablas,debemos definir el atributo público $timestamps de nuestro modelo con el valor false.
 
     public $timestamps = false;  
+
+> Eloquent también assume que cada modelo correspondiente a una tabla de la base de datostiene una primary key column llamada "id". Si necesitamos modificarla, podemos definir un atributo protected $primaryKey con el nombre del campo que sea nuestra primary key.
+
+    protected $primaryKey = 'icProducto';  
