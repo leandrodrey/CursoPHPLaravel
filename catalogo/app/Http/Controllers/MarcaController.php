@@ -120,6 +120,11 @@ class MarcaController extends Controller
             ->with([ 'mensaje'=>'Marca: '.$mkNombre.' modificada correctamente' ]);
     }
 
+    /**
+     * Método para chequear si hay un producto de una marca
+     * @param $idMarca
+     * @return int
+     */
     private function productoPorMarca($idMarca)
     {
         //$check = Producto::where('idMarca', $idMarca)->first();
@@ -132,13 +137,19 @@ class MarcaController extends Controller
     {
         //obtener datos de una marca por su id
         $Marca = Marca::find($idMarca);
-        ## checkear si NO hay un producto de esa marca
-        if( $this->productoPorMarca($idMarca) == 0 ){
-            //retornar vista con datos para la confirmación de baja
-            return 'vista con datos para la confirmación de baja';
+        ## chequear si NO hay productos e ese marca
+        if ( $this->productoPorMarca($idMarca) == 0 ){
+            //retornamos vista para confirmar baja
+            return view('eliminarMarca',
+                        [ 'Marca' => $Marca ]
+                    );
         }
-        return 'redirección con mensaje que no se puede borrar';
+        return redirect('/adminMarcas')
+                            ->with([
+                                'mensaje' => 'No se puede eliminar la marca: '.$Marca->mkNombre.' ya que tiene productos relacionados.'
+                            ]);
     }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -149,4 +160,6 @@ class MarcaController extends Controller
     {
         //
     }
+
+
 }
