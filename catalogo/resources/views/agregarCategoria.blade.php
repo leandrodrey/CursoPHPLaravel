@@ -10,7 +10,8 @@
                 <div class="form-group">
                     <label for="catNombre">Nombre de la categoria</label>
                     <input type="text" name="catNombre"
-                           class="form-control" id="catNombre" required>
+                           value="{{ old('catNombre') }}"
+                           class="form-control" id="catNombre">
                 </div>
                 <button class="btn btn-dark mr-3">Agregar categoria</button>
                 <a href="/adminCategorias" class="btn btn-outline-secondary">
@@ -19,6 +20,15 @@
             </form>
         </div>
 
+        @if( $errors->any() )
+            <div class="alert alert-danger col-8 mx-auto p-2">
+                <ul>
+                    @foreach( $errors->all() as $error )
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
 
     @endsection

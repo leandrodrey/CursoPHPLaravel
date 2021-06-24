@@ -28,6 +28,20 @@ class CategoriaController extends Controller
         return view('agregarCategoria');
     }
 
+    private function validarCategoria(Request $request)
+    {
+        $request->validate(
+            [
+                'catNombre'=>'required|min:2|max:30'
+            ],
+            [
+                'catNombre.required'=>'El campo "Nombre de la categoría" es obligatorio.',
+                'catNombre.min'=>'El campo "Nombre de la categoría" debe tener al menos 2 caractéres.',
+                'catNombre.max'=>'El campo "Nombre de la categoría" debe tener 30 caractéres como máximo.'
+            ]
+        );
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -36,7 +50,20 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $catNombre = $request->catNombre;
+        //validación
+        $this->validarCategoria($request);
+        // instanciamos, asignamos valores y guardar
+        $Categoria = new Categoria;
+        $Categoria->catNombre = $catNombre;
+        $Categoria->save();
+        //retornar petición + mensaje
+        return redirect('/adminCategorias')
+            ->with(
+                [
+                    'mensaje'=>'Categoría: '.$catNombre.' agregada correctamente'
+                ]
+            );
     }
 
     /**
