@@ -83,9 +83,15 @@ class CategoriaController extends Controller
      * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categoria $categoria)
+    public function edit( $id )
     {
-        //
+        $Categoria = Categoria::find($id);
+        //retornamos a la vista pasando datos
+        return view('modificarCategoria',
+            [
+                'Categoria'=>$Categoria
+            ]
+        );
     }
 
     /**
@@ -95,9 +101,24 @@ class CategoriaController extends Controller
      * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categoria $categoria)
+    public function update(Request $request)
     {
-        //
+        $catNombre = $request->catNombre;
+        //validamos
+        $this->validarCategoria($request);
+        //obtenemos datos de la categoría
+        $Categoria = Categoria::find($request->idCategoria);
+        //asignamos
+        $Categoria->catNombre = $catNombre;
+        //guardamos
+        $Categoria->save();
+        //retornamos a redirección con mensaje
+        return redirect('/adminCategorias')
+            ->with(
+                [
+                    'mensaje'=>'Categoría: '.$catNombre.' modificada correctamente'
+                ]
+            );
     }
 
     /**
