@@ -146,7 +146,8 @@ class MarcaController extends Controller
         }
         return redirect('/adminMarcas')
                             ->with([
-                                'mensaje' => 'No se puede eliminar la marca: '.$Marca->mkNombre.' ya que tiene productos relacionados.'
+                                'mensaje' => 'No se puede eliminar la marca: '.$Marca->mkNombre.' ya que tiene productos relacionados.',
+                                'clase'   => 'danger'
                             ]);
     }
 
@@ -156,10 +157,15 @@ class MarcaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $idMarca  = $request->idMarca;
+        $mkNombre = $request->mkNombre;
+        //Marca::where('idMarca', $idMarca)->delete();
+        Marca::destroy($idMarca);
+        //redirección + mensaje ok
+        return redirect('adminMarcas')
+            ->with([ 'mensaje'=>'Marca: '.$mkNombre.' eliminada correctamente' ]);
     }
-
 
 }

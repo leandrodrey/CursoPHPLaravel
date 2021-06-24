@@ -10,11 +10,12 @@ Route::get('/', function () {
 #### CRUD de marcas
 use App\Http\Controllers\MarcaController;
 Route::get('/adminMarcas', [ MarcaController::class, 'index' ]);
-Route::get('/agregarMarca', [ MarcaController::class, 'create' ] );
-Route::post('/agregarMarca', [ MarcaController::class, 'store' ] );
+Route::get('/agregarMarca', [ MarcaController::class, 'create' ]);
+Route::post('/agregarMarca', [ MarcaController::class, 'store' ]);
 Route::get('/modificarMarca/{id}', [ MarcaController::class, 'edit' ]);
 Route::put('/modificarMarca', [ MarcaController::class, 'update' ]);
-Route::get('/eliminarMarca/{id}', [ MarcaController::class, 'confirmarBaja' ] );
+Route::get('/eliminarMarca/{id}', [ MarcaController::class, 'confirmarBaja' ]);
+Route::delete('eliminarMarca', [ MarcaController::class, 'destroy' ]);
 
 ###########################################
 #### CRUD de categorias
@@ -22,5 +23,8 @@ use App\Http\Controllers\CategoriaController;
 Route::get('/adminCategorias', [ CategoriaController::class, 'index' ]);
 Route::get('/agregarCategoria', [ CategoriaController::class, 'create' ]);
 Route::post('/agregarCategoria', [ CategoriaController::class, 'store' ]);
-Route::get('/modificarCategoria/{id}', [ CategoriaController::class, 'edit' ] );
+Route::get('/modificarCategoria/{id}', [ CategoriaController::class, 'edit' ]);
 Route::put('/modificarCategoria', [ CategoriaController::class, 'update' ]);
+
+###########################################
+#### CRUD de productos
