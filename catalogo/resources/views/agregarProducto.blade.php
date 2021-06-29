@@ -8,7 +8,7 @@
         <div class="alert bg-light border border-white shadow round col-8 mx-auto p-4">
 
             <form action="/agregarProducto" method="post" enctype="multipart/form-data">
-
+        @csrf
                 Nombre: <br>
                 <input type="text" name="prdNombre" class="form-control">
                 <br>
