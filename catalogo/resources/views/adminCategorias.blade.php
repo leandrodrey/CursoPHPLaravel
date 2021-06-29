@@ -5,7 +5,7 @@
         <h1>Panel de administración de categorías</h1>
 
         @if ( session('mensaje') )
-            <div class="alert alert-success">
+            <div class="alert alert-{{ (session('danger'))?'danger':'success' }}">
                 {{ session('mensaje') }}
             </div>
         @endif
@@ -28,12 +28,12 @@
                     <td>{{ $categoria->idCategoria }}</td>
                     <td>{{ $categoria->catNombre }}</td>
                     <td>
-                        <a href="/modificarCategoria" class="btn btn-outline-secondary">
+                        <a href="/modificarCategoria/{{ $categoria->idCategoria }}" class="btn btn-outline-secondary">
                             Modificar
                         </a>
                     </td>
                     <td>
-                        <a href="/eliminarCategoria" class="btn btn-outline-secondary">
+                        <a href="/eliminarCategoria/{{ $categoria->idCategoria }}" class="btn btn-outline-secondary">
                             Eliminar
                         </a>
                     </td>
