@@ -105,8 +105,17 @@ class ProductoController extends Controller
         //subir imagen (si fue enviada)
         $prdImagen = $this->subirImagen($request);
         //instanciar, asignar, guardar
+        $Producto = new Producto;
+        $Producto->prdNombre = $prdNombre;
+        $Producto->prdPrecio = $request->prdPrecio;
+        $Producto->idMarca = $request->idMarca;
+        $Producto->idCategoria = $request->idCategoria;
+        $Producto->prdPresentacion = $request->prdPresentacion;
+        $Producto->prdStock = $request->prdStock;
+        $Producto->prdImagen = $prdImagen;
         //redirección con mensaje ok
-        return 'imagen: '.$prdImagen;
+        return redirect('adminProductos')
+                ->with(['mensaje' => 'Producto '.$prdNombre.' agregado con éxito']);
     }
 
     /**
