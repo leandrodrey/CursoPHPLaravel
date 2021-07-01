@@ -80,8 +80,14 @@ class ProductoController extends Controller
         //si no enviaron archivo
         $prdImagen = 'noDisponible.jpg';
         //si enviaron imagen SUBIR ARCHIVO
+        if( $request->file('prdImagen') ) {
             //renombrar
+            $ext = $request->file('prdImagen')->extension();
+            $prdImagen = time().'.'.$ext;
             //subir
+            $request->file('prdImagen')
+                    ->move( public_path('productos/'), $prdImagen );
+        }
         return $prdImagen;
     }
 
