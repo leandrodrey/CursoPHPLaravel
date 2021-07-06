@@ -77,8 +77,14 @@ class ProductoController extends Controller
 
     private function subirImagen(Request $request)
     {
-        //si no enviaron archivo
+        //si no enviaron archivo método store()
         $prdImagen = 'noDisponible.jpg';
+
+        //si no enviaron archivo método update()
+        if( $request->has('imagenOriginal') ){
+            $prdImagen = $request->imagenOriginal;
+        }
+
         //si enviaron imagen SUBIR ARCHIVO
         if( $request->file('prdImagen') ) {
             //renombrar
@@ -113,6 +119,7 @@ class ProductoController extends Controller
         $Producto->prdPresentacion = $request->prdPresentacion;
         $Producto->prdStock = $request->prdStock;
         $Producto->prdImagen = $prdImagen;
+        $Producto->save();
         //redirección con mensaje ok
         return redirect('adminProductos')
                 ->with(['mensaje' => 'Producto '.$prdNombre.' agregado con éxito']);
@@ -135,9 +142,20 @@ class ProductoController extends Controller
      * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function edit(Producto $producto)
+    public function edit( $id )
     {
-        //
+        //obtenemos listados de maracs y de categorias
+        $marcas = Marca::all();
+        $categorias = Categoria::all();
+        $Producto = Producto::with('relMarca', 'relCategoria')
+                                ->find($id);
+        return view('modificarProducto',
+                    [
+                        'marcas'    =>  $marcas,
+                        'categorias'=>  $categorias,
+                        'Producto'  => $Producto
+                    ]
+                );
     }
 
     /**
@@ -147,9 +165,35 @@ class ProductoController extends Controller
      * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Producto $producto)
+    public function update(Request $request)
     {
-        //
+        $prdNombre = $request->prdNombre;
+        //validación
+        $this->validarForm($request);
+        //subir imagen * si fue enviada
+        $prdImagen = $this->subirImagen($request);
+        //obtenemos datos de un producto por su ID
+        $Producto = Producto::find($request->idProducto);
+        //asignamos
+        $Producto -> prdNombre          = $prdNombre;
+        $Producto -> prdPrecio          = $request->prdPrecio;
+        $Producto -> idMarca            = $request->idMarca;
+        $Producto -> idCategoria        = $request->idCategoria;
+        $Producto -> prdPresentacion    = $request->prdPresentacion;
+        $Producto -> prdStock           = $request->prdStock;
+        $Producto -> prdImagen          = $prdImagen;
+        /*
+        $imagen = $Producto->prdImagen;
+        if ( $imagen != 'noDisponible.jpg' && $prdImagen == 'noDisponible.jpg') {
+            $Producto->prdImagen = $imagen;
+        } else {
+            $Producto->prdImagen = $prdImagen;
+        }
+        */
+        //guardamos
+        $Producto->save();
+        return redirect('adminProductos')
+            ->with(['mensaje' => 'Producto '.$prdNombre.' modificado con éxito']);
     }
 
     /**
