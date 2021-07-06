@@ -196,14 +196,26 @@ class ProductoController extends Controller
             ->with(['mensaje' => 'Producto '.$prdNombre.' modificado con éxito']);
     }
 
+    public function confirmarBaja($id)
+    {
+        $Producto = Producto::with('relMarca', 'relCategoria')
+                                ->find($id);
+        return view('eliminarProducto', [ 'Producto'=>$Producto ]);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Producto $producto)
+    public function destroy(Request $request)
     {
-        //
+        $idProducto = $request->idProducto;
+        $prdNombre = $request->prdNombre;
+        # Producto::find($idProducto)->delete();
+        Producto::destroy($idProducto);
+        return redirect('/adminProductos')
+                ->with(['mensaje' => 'Producto: ' . $prdNombre . ' eliminado correctamente']);
     }
 }
