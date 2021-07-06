@@ -22,7 +22,7 @@
                     </div>
                     <input type="number" name="prdPrecio"
                            value="{{ old('prdPrecio', $Producto->prdPrecio) }}"
-                           class="form-control">
+                           class="form-control" step="0.01">
                 </div>
                 <br>
                 Marca: <br>
