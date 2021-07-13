@@ -29,7 +29,10 @@
 
     php artisan breeze:install  
 
-> Ahora dejar listo TailwindCSS y algo de Javascript
+Esta comendo genera las vistas de autenticación, los routes, los controllers y otros recursos de instalación.
+
+> Ahora dejar listo TailwindCSS y algo de Javascript  
+
      npm install  
      npm run dev 
 
