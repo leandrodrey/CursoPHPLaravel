@@ -27,11 +27,11 @@
 > Este comando descarga los packages necesarios para instalar Breeze y sus dependencias  
 > Como aún faltan generar las vistas esto se logra con el comando install
 
-    php artisan breeze:install  
+    php artisan breeze:install   
 
-Esta comendo genera las vistas de autenticación, los routes, los controllers y otros recursos de instalación.
+> Esta comendo genera las vistas de autenticación, los routes, los controllers y otros recursos de instalación.
 
-> Ahora dejar listo TailwindCSS y algo de Javascript  
+> Ahora dejar listo TailwindCSS y algo de javascript  
 
      npm install  
      npm run dev 
