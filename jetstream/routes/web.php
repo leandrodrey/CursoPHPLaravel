@@ -16,14 +16,3 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-#########################
-##### CRUD de marcas
-use App\Http\Controllers\MarcaController;
-Route::get('/adminMarcas', [ MarcaController::class, 'index' ] )
-            ->middleware(['auth'])->name('/adminMarcas');
-
-require __DIR__.'/auth.php';
